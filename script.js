@@ -1,82 +1,87 @@
 "use strict";
+window.onload = function () {
+  const h1 = document.querySelector("h1");
+  const btnNewgame = document.getElementById("btn-newgame");
+  const selectionBtns = document.getElementById("selection-btns");
+  const scoresDisplay = document.getElementById("scores-display");
+  const score1 = document.getElementById("score1");
+  const score2 = document.getElementById("score2");
+  const btnRock = document.getElementById("btn-rock");
+  const btnPaper = document.getElementById("btn-scissors");
+  const btnScissors = document.getElementById("btn-scissors");
+  const handOne = document.getElementById("hand1");
+  const handTwo = document.getElementById("hand2");
+  const buttons = document.querySelectorAll("#selection-btns > button");
 
-const computerSelection = computerPlay();
-const playerInput = prompt("Rock, paper, scissors...?");
-const playerSelection = nullCheck(playerInput);
+  const newGame = () => {
+    btnNewgame.classList.add("hidden");
+    selectionBtns.classList.remove("hidden");
+    scoresDisplay.classList.remove("hidden");
+    h1.textContent = "Rock, paper, scissors...?";
+    h1.style.marginTop = "2.5rem";
+    let score = [0, 0];
+    score1.textContent = "0";
+    score2.textContent = "0";
 
-function nullCheck(playerInput) {
-  if (playerInput === null) {
-    return null;
-  } else {
-    return playerInput.toLowerCase();
-  }
-}
+    const computerPlay = () => {
+      const diceRoll = Math.floor(Math.random() * 3);
+      if (diceRoll === 0) return "r";
+      else if (diceRoll === 1) return "p";
+      else return "s";
+    };
 
-function computerPlay() {
-  const diceRoll = Math.floor(Math.random() * 3);
-  if (diceRoll === 0) return "rock";
-  else if (diceRoll === 1) return "paper";
-  else return "scissors";
-}
-
-function playRound(playerSelection, computerSelection) {
-  if (playerSelection === computerSelection) return "Draw.";
-  else {
-    if (playerSelection === "rock" && computerSelection === "paper")
-      return "You lose. Paper beats rock.";
-    else if (playerSelection === "rock" && computerSelection === "scissors")
-      return "You win. Rock beats scissors.";
-    else if (playerSelection === "paper" && computerSelection === "rock")
-      return "You win. Paper beats rock.";
-    else if (playerSelection === "paper" && computerSelection === "scissors")
-      return "You lose. Scissors beats paper.";
-    else if (playerSelection === "scissors" && computerSelection === "rock")
-      return "You lose. Rock beats scissors.";
-    else if (playerSelection === "scissors" && computerSelection === "paper")
-      return "You win. Scissors beats paper.";
-    else if (playerSelection !== null)
-      return "Invalid input! Please choose rock, paper, or scissors.";
-    else return "Thanks for playing!";
-  }
-}
-console.log(playRound(playerSelection, computerSelection));
-
-// ***Function solution using basic math***
-// const computerSelection = 1;
-// const playerSelection = 1;
-// function computerPlay() {
-//   return Math.floor(Math.random() * 3);
-// }
-// function convertGuesstoNumber(playerSelection) {
-//   if (playerSelection === "rock") {
-//     return 0;
-//   } else if (playerSelection === "paper") {
-//     return 1;
-//   } else if (playerSelection === "scissors") {
-//     return 2;
-//   } else {
-//     console.log("Invalid input!");
-//   }
-// }
-// function playRound(playerSelection, computerSelection) {
-//   console.log("player:" + playerSelection);
-//   console.log("computer:" + computerSelection);
-//   if (
-//     playerSelection + 1 === computerSelection ||
-//     playerSelection - 2 === computerSelection
-//   ) {
-//     console.log("You lose.");
-//   } else if (playerSelection - 1 === computerSelection) {
-//     console.log("You win!");
-//   } else {
-//     console.log("Draw.");
-//   }
-//   console.log("player:" + playerSelection);
-//   console.log("computer:" + computerSelection);
-// }
-// playRound(playerSelection, computerSelection);
-// const computerSelection = computerPlay();
-// const playerSelection = convertGuesstoNumber(
-//   prompt("Rock, paper, scissors...?").toLowerCase()
-// );
-// const computerSelection = 1;
+    buttons.forEach(button => {
+      button.addEventListener("click", () => {
+        if (score[0] < 5 && score[1] < 5) {
+          const playGame = pick => {
+            const playRound = (playerSelection, computerSelection) => {
+              if (playerSelection === computerSelection) {
+                return ["Draw.", 0];
+              } else if (playerSelection === "r" && computerSelection === "p") {
+                return ["Paper beats rock.", 2];
+              } else if (playerSelection === "r" && computerSelection === "s") {
+                return ["Rock beats scissors.", 1];
+              } else if (playerSelection === "p" && computerSelection === "r") {
+                return ["Paper beats rock.", 1];
+              } else if (playerSelection === "p" && computerSelection === "s") {
+                return ["Scissors beats paper.", 2];
+              } else if (playerSelection === "s" && computerSelection === "r") {
+                return ["Rock beats scissors.", 2];
+              } else if (playerSelection === "s" && computerSelection === "p") {
+                return ["Scissors beats paper.", 1];
+              }
+            };
+            const result = playRound(pick, computerPlay());
+            if (result[1] === 0) {
+              h1.textContent = "Draw.";
+            }
+            if (result[1] === 1) {
+              h1.textContent = `You win. ${result[0]}`;
+              score[0]++;
+            }
+            if (result[1] === 2) {
+              h1.textContent = `You lose. ${result[0]}`;
+              score[1]++;
+            }
+            score1.textContent = score[0];
+            score2.textContent = score[1];
+            // console.log(result);
+            // console.log(score);
+            if (score[0] === 5) {
+              h1.textContent = "You win the game!";
+              btnNewgame.classList.remove("hidden");
+              selectionBtns.classList.add("hidden");
+            }
+            if (score[1] === 5) {
+              h1.textContent = "You lost the game.";
+              btnNewgame.classList.remove("hidden");
+              selectionBtns.classList.add("hidden");
+            }
+          };
+          playGame(button.id[4]);
+        }
+      });
+    });
+  };
+  btnNewgame.addEventListener("click", newGame);
+};

@@ -7,7 +7,28 @@
     <meta name="author" content="Aydin Taskin" />
     <title>Rock, Paper, Sissors</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
   </head>
-  <body></body>
-  <script src="script.js"></script>
+  <body>
+    <div id="main-section" class="flex-container">
+      <!-- Hands -->
+      <!-- <section>
+        <div id="hand1" class="hands"></div>
+        <div id="hand2" class="hands"></div>
+      </section> -->
+      <!-- Scores display -->
+      <div id="scores-display" class="flex-container hidden">
+        <div id="score1">0</div>
+        <div id="score2">0</div>
+      </div>
+      <h1>Rock, paper, scissors...?</h1>
+      <!-- Buttons -->
+      <button id="btn-newgame">New Game</button>
+      <div id="selection-btns" class="flex-container hidden">
+        <button id="btn-rock">Rock</button>
+        <button id="btn-paper">Paper</button>
+        <button id="btn-scissors">Scissors</button>
+      </div>
+    </div>
+  </body>
 </html>

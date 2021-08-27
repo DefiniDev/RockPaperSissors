@@ -1,11 +1,132 @@
-/* :root {
+/* CSS Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-} */
+/* Flex */
+.flex-container {
+  display: flex;
+}
 
-/* * {
+.hidden {
+  display: none;
+}
 
-} */
+body {
+  font-size: 10px;
+  background-color: rgb(84, 181, 255);
+}
 
-/* body {
+#main-section {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 30vh;
+  /* border: 3px solid green; */
+}
 
-} */
+#scores-display {
+  width: 350px;
+  justify-content: space-between;
+}
+
+#score1,
+#score2 {
+  font-size: 5rem;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  color: rgb(84, 181, 255);
+  background-color: orange;
+  border-radius: 10px;
+  border: none;
+  padding: 0.2rem 0.5rem;
+}
+
+h1 {
+  font-size: 3rem;
+  font-family: monospace;
+  color: orange;
+  margin-top: 5rem;
+}
+
+button {
+  font-size: 3rem;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  color: rgb(84, 181, 255);
+  background-color: orange;
+  border-radius: 10px;
+  border: none;
+  padding: 0.2rem 0.5rem;
+  margin: 3rem 1rem;
+  transform: scale(1);
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  background-color: gold;
+  transform: scale(1.1);
+  transition: all 0.2s ease;
+}
+
+/* Mobile */
+@media only screen and (max-width: 596px) {
+  #selection-btns {
+    flex-direction: column;
+  }
+
+  button {
+    margin-top: 2rem;
+  }
+
+  h1 {
+    margin-bottom: 2rem;
+  }
+
+  #main-section {
+    margin-top: 20vh;
+    /* border: 3px solid green; */
+  }
+}
+
+/* Hands + hand animation (future gfx update...) */
+/*
+.hands {
+  width: 300px;
+  height: 300px;
+  display: inline-block;
+  margin: 0 2rem;
+}
+
+#hand1 {
+  background: transparent url(img/hand-rockr.png) no-repeat center;
+  background-size: contain;
+}
+
+#hand2 {
+  background: transparent url(img/hand-rockl.png) no-repeat center;
+  background-size: contain;
+}
+*/
+
+/* Hand Animation */
+/*
+.handshake {
+  animation-name: handshake;
+  animation-duration: 0.6s;
+  animation-iteration-count: 3;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes handshake {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-70px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+*/
